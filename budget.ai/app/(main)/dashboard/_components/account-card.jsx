@@ -13,35 +13,35 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-// import { updateDefaultAccount } from "@/actions/account";
+import { updateDefaultAccount } from "@/actions/accounts";
 import { toast } from "sonner";
 
-export function AccountCard({ account }) {
+export default function AccountCard({ account }) {
   const { name, type, balance, id, isDefault } = account;
 
-//   const {
-//     loading: updateDefaultLoading,
-//     fn: updateDefaultFn,
-//     data: updatedAccount,
-//     error,
-//   } = useFetch(updateDefaultAccount);
+  const {
+    loading: updateDefaultLoading,
+    fn: updateDefaultFn,
+    data: updatedAccount,
+    error,
+  } = useFetch(updateDefaultAccount);
 
-//   const handleDefaultChange = async (event) => {
-//     event.preventDefault(); // Prevent navigation
+  const handleDefaultChange = async (event) => {
+    event.preventDefault(); // Prevent navigation
 
-//     if (isDefault) {
-//       toast.warning("You need atleast 1 default account");
-//       return; // Don't allow toggling off the default account
-//     }
+    if (isDefault) {
+      toast.warning("You need atleast 1 default account");
+      return; // Don't allow toggling off the default account
+    }
 
-//     await updateDefaultFn(id);
-//   };
+    await updateDefaultFn(id);
+  };
 
-//   useEffect(() => {
-//     if (updatedAccount?.success) {
-//       toast.success("Default account updated successfully");
-//     }
-//   }, [updatedAccount]);
+  useEffect(() => {
+    if (updatedAccount?.success) {
+      toast.success("Default account updated successfully");
+    }
+  }, [updatedAccount]);
 
   useEffect(() => {
     if (error) {
@@ -58,7 +58,7 @@ export function AccountCard({ account }) {
           </CardTitle>
           <Switch
             checked={isDefault}
-            // onClick={handleDefaultChange}
+            onClick={handleDefaultChange}
             disabled={updateDefaultLoading}
           />
         </CardHeader>
