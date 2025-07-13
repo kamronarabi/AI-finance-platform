@@ -176,6 +176,7 @@ export default function TransactionTable({ transactions }) {
       return;
 
     deleteFn(selectedIds);
+    setSelectedIds([])
   };
 
   useEffect(() => {

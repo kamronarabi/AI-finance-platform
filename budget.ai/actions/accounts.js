@@ -89,6 +89,8 @@ export async function getAccountWithTransactions(accountId) {
   }
 
   export async function bulkDeleteTransactions(transactionIds) {
+    console.log('Incoming IDs →', transactionIds)
+
     try {
       const { userId } = await auth();
       if (!userId) throw new Error("Unauthorized");
@@ -106,14 +108,11 @@ export async function getAccountWithTransactions(accountId) {
           userId: user.id,
         },
       });
-  
       // Group transactions by account to update balances
-      const accountBalanceChanges = transactions.reduce((acc, transaction) => {
-        const change =
-          transaction.type === "EXPENSE"
-            ? transaction.amount
-            : -transaction.amount;
-        acc[transaction.accountId] = (acc[transaction.accountId] || 0) + change;
+      const accountBalanceChanges = transactions.reduce((acc, t) => {
+        const amt   = Number(t.amount);                            
+        const delta = t.type === 'EXPENSE' ?  amt : -amt;         
+        acc[t.accountId] = (acc[t.accountId] ?? 0) + delta;        
         return acc;
       }, {});
   
@@ -130,6 +129,7 @@ export async function getAccountWithTransactions(accountId) {
         // Update account balances
         for (const [accountId, balanceChange] of Object.entries(
           accountBalanceChanges
+          
         )) {
           await tx.account.update({
             where: { id: accountId },
