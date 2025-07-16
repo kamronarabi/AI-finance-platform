@@ -13,8 +13,8 @@ const Header = async () => {
 
         <nav className='container mx-auto px-1 py-4 flex items-center justify-between'>
             <Link href='/'>
-                <Image src={'/next.svg'} alt="Budget.ai" height={60} width={200} 
-                className='h-12 w-auto object-contain'/>
+                <Image src={'/logo.png'} alt="Budget.ai" height={60} width={200} 
+                className='h-12 w-auto  object-contain'/>
             </Link>
 
         <div className='flex items-center space-x-2'>

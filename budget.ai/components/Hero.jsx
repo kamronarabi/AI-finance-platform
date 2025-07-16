@@ -44,7 +44,7 @@ const Hero = () => {
             </div>
             <div className="hero-image-wrapper mt-5 md:mt-0">
                 <div ref={imageRef} className="hero-image">
-                    <Image src='/next.svg' width={1280} height={720} alt= 'dashboard prev' className='rounded-lg shodow-2xl border mx-auto' priority />
+                    <Image src='/hero.png' width={1280} height={720} alt= 'dashboard prev' className='rounded-xl shodow-2xl border mx-auto transform scale-80' priority />
                 </div>
             </div>
         </div>
