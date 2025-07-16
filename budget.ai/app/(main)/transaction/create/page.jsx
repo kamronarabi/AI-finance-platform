@@ -5,11 +5,10 @@ import { getTransaction } from "@/actions/transaction";
 
 export default async function AddTransactionPage({ searchParams }) {
   const accounts = await getUserAccounts();
-  const editId = searchParams?.edit;
-
+  const { edit } = await searchParams;
   let initialData = null;
-  if (editId) {
-    const transaction = await getTransaction(editId);
+  if (edit) {
+    const transaction = await getTransaction(edit);
     initialData = transaction;
   }
 
@@ -21,7 +20,7 @@ export default async function AddTransactionPage({ searchParams }) {
       <AddTransactionForm
         accounts={accounts}
         categories={defaultCategories}
-        editMode={!!editId}
+        editMode={!!edit}
         initialData={initialData}
       />
     </div>
